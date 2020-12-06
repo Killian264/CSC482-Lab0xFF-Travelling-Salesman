@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="c6ee2f84-820f-4266-a10c-a8ae943f4689" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1lFjrwajdIBwAJqIIoxLn34AWTF" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RunManager" selected="JUnit.killiandebacker.com.tests in Lab0xFF-Traveling-Salesman">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="killiandebacker.com.Main" />
+      <module name="Lab0xFF-Traveling-Salesman" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="killiandebacker.com.tests in Lab0xFF-Traveling-Salesman" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Lab0xFF-Traveling-Salesman" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="killiandebacker.com.tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="killiandebacker.com.tests" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="JUnit.killiandebacker.com.tests in Lab0xFF-Traveling-Salesman" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.killiandebacker.com.tests in Lab0xFF-Traveling-Salesman" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c6ee2f84-820f-4266-a10c-a8ae943f4689" name="Default Changelist" comment="" />
+      <created>1607199935460</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1607199935460</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="878" y="353" key="#tests_in_Lab0xFF-Traveling-Salesman" timestamp="1607200108262">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state x="878" y="353" key="#tests_in_Lab0xFF-Traveling-Salesman/3840.0.1080.1920/-1920.0.1920.1080/0.0.2560.1440@0.0.2560.1440" timestamp="1607200108262" />
+    <state x="761" y="296" key="SettingsEditor" timestamp="1607200092546">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state x="761" y="296" key="SettingsEditor/3840.0.1080.1920/-1920.0.1920.1080/0.0.2560.1440@0.0.2560.1440" timestamp="1607200092546" />
+    <state x="1015" y="615" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1607200082407">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state x="1015" y="615" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/3840.0.1080.1920/-1920.0.1920.1080/0.0.2560.1440@0.0.2560.1440" timestamp="1607200082407" />
+  </component>
+</project>
