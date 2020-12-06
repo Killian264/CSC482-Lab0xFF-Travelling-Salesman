@@ -8,16 +8,18 @@ public class Main {
 
         Graph g = new Graph(12);
 
-        int r = 3;
+        int radius = 3;
 
-        g.generateRandomCostMatrix(100);
+        // g.generateRandomCostMatrix(100);
 
-        g.generateRandomEuclideanCostMatrix(10);
+        // g.generateRandomEuclideanCostMatrix(10);
 
-        g.generateRandomEuclideanCostMatrix(5);
+        // g.generateRandomEuclideanCostMatrix(5);
 
 
-        g.generateRandomSquareGraphCostMatrix(4);
+        // g.generateRandomSquareGraphCostMatrix(4);
+
+        g.generateCircleGraphCostMatrix(radius);
 
 
 

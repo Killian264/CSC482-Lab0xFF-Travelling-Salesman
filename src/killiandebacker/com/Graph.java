@@ -8,14 +8,14 @@ import java.util.Random;
 
 public class Graph {
 
-	public int[][] matrix;
+	public double[][] matrix;
 	public static int[] vertices;
 	int size;
 	final int nil = -1;
 
 	public Graph(int in_size) {
 		size = in_size;
-		matrix = new int[size][size];
+		matrix = new double[size][size];
 		vertices = new int[size];
 
 
@@ -24,12 +24,12 @@ public class Graph {
 	}
 
 	public void clearGraph() {
-		for (int[] row : matrix) {
+		for (double[] row : matrix) {
 			Arrays.fill(row, nil);
 		}
 	}
 
-	public void addEdge(int start, int end, int cost) {
+	public void addEdge(int start, int end, double cost) {
 		matrix[start][end] = cost;
 		matrix[end][start] = cost;
 	}
@@ -46,12 +46,13 @@ public class Graph {
 				if (i == j) {
 					continue;
 				}
-				int cost = random.nextInt(max);
+				double cost = random.nextDouble() * random.nextInt(max);
 				addEdge(i, j, cost);
 			}
 		}
 	}
 
+	// Points on the matrix are always on a int x and int y
 	public int[][] generateRandomEuclideanCostMatrix(int maxXY) {
 		// this should be squared really 
 		if(maxXY < size){
@@ -90,7 +91,7 @@ public class Graph {
 				int x2 = cord2[0];
 				int y2 = cord2[1];
 
-				int d = distance(x1, y1, x2, y2);
+				double d = distance(x1, y1, x2, y2);
 				addEdge(i, j, d);
 			}
 		}
@@ -99,54 +100,19 @@ public class Graph {
 
 	}
 
-	// FOR TESTING ONLY 
-	// THIS FUNCTION SUCKS
-	public int[][] generateRandomSquareGraphCostMatrix(int diameter){
+	public double[][] generateCircleGraphCostMatrix(int radius){
 		randomizeVertices();
 
-		int totalLocations = 4*diameter;
-		
-		if(4 * diameter < size){
-			diameter = size;
+		// Using code from the one note
+        double stepAngle = (2 * Math.PI) / size;
+		double[][] cords = new double[size][2];
+
+
+        for (int step = 0; step < size; step++) {
+            cords[step][0] = radius * Math.sin(step * stepAngle);
+			cords[step][1] = radius * Math.cos(step* stepAngle);
 		}
-
-		int step = (int)Math.ceil(totalLocations / size);
-
-		int[][] cords = new int[size][2];
-
-		int count = 0;
-		int count1 = 0;
-		System.out.println("Expected");
-		for(int i = 0; i < size; i++){
-			int vertex = vertices[i];
-			System.out.print(vertex + " -> ");
-
-			int[] cord = new int[2];
-
-			int loc = i * step;
-			
-			if( loc < diameter){
-				cord[0] = loc;
-				cord[1] = 0;
-			}
-			else if( (loc + (step * 2)) < diameter * 2){
-				cord[0] = diameter - 1;
-				cord[1] = (loc % diameter) + 1;
-			}
-			else if( (loc + (step * 2)) < (diameter * 3)){
-				cord[0] = diameter - count - 1;
-				cord[1] = diameter - 1;
-				count++;
-			}
-			else{
-				cord[0] = 0;
-				cord[1] = (diameter - 2) - count1;
-				count1++;
-			}
-
-			cords[vertex] = cord;
-		}
-		System.out.println();
+        // printCords(cords);
 
 		// Generate matrix from cords
 		for (int i = 0; i < size; i++) {
@@ -154,21 +120,92 @@ public class Graph {
 				if (i == j) {
 					continue;
 				} 
-				int[] cord1 = cords[i];
-				int[] cord2 = cords[j];
+				double[] cord1 = cords[i];
+				double[] cord2 = cords[j];
 
-				int x1 = cord1[0];
-				int y1 = cord1[1];
-				int x2 = cord2[0];
-				int y2 = cord2[1];
+				double x1 = cord1[0];
+				double y1 = cord1[1];
+				double x2 = cord2[0];
+				double y2 = cord2[1];
 
-				int d = distance(x1, y1, x2, y2);
+				double d = distance(x1, y1, x2, y2);
 				addEdge(i, j, d);
 			}
 		}
 
 		return cords;
 	}
+
+	// FOR TESTING ONLY 
+	// THIS FUNCTION SUCKS
+	// public int[][] generateRandomSquareGraphCostMatrix(int diameter){
+	// 	randomizeVertices();
+
+	// 	int totalLocations = 4*diameter;
+		
+	// 	if(4 * diameter < size){
+	// 		diameter = size;
+	// 	}
+
+	// 	int step = (int)Math.ceil(totalLocations / size);
+
+	// 	int[][] cords = new int[size][2];
+
+	// 	int count = 0;
+	// 	int count1 = 0;
+	// 	System.out.println("Expected");
+	// 	for(int i = 0; i < size; i++){
+	// 		int vertex = vertices[i];
+	// 		System.out.print(vertex + " -> ");
+
+	// 		int[] cord = new int[2];
+
+	// 		int loc = i * step;
+			
+	// 		if( loc < diameter){
+	// 			cord[0] = loc;
+	// 			cord[1] = 0;
+	// 		}
+	// 		else if( (loc + (step * 2)) < diameter * 2){
+	// 			cord[0] = diameter - 1;
+	// 			cord[1] = (loc % diameter) + 1;
+	// 		}
+	// 		else if( (loc + (step * 2)) < (diameter * 3)){
+	// 			cord[0] = diameter - count - 1;
+	// 			cord[1] = diameter - 1;
+	// 			count++;
+	// 		}
+	// 		else{
+	// 			cord[0] = 0;
+	// 			cord[1] = (diameter - 2) - count1;
+	// 			count1++;
+	// 		}
+
+	// 		cords[vertex] = cord;
+	// 	}
+	// 	System.out.println();
+
+	// 	// Generate matrix from cords
+	// 	for (int i = 0; i < size; i++) {
+	// 		for (int j = i; j < size; j++) {
+	// 			if (i == j) {
+	// 				continue;
+	// 			} 
+	// 			int[] cord1 = cords[i];
+	// 			int[] cord2 = cords[j];
+
+	// 			int x1 = cord1[0];
+	// 			int y1 = cord1[1];
+	// 			int x2 = cord2[0];
+	// 			int y2 = cord2[1];
+
+	// 			double d = distance(x1, y1, x2, y2);
+	// 			addEdge(i, j, d);
+	// 		}
+	// 	}
+
+	// 	return cords;
+	// }
 
 	public void initalizeVertices(){
 		for (int i = 1; i < size; i++) {
@@ -196,8 +233,8 @@ public class Graph {
 	}
 
 	// There will be a loss of precision here but this should be fine
-	public int distance(int x1, int y1, int x2, int y2) {
-		return (int)Math.sqrt((y2 - y1) * (y2 - y1) + (x2 - x1) * (x2 - x1));
+	public double distance(double x1, double y1, double x2, double y2) {
+		return Math.sqrt((y2 - y1) * (y2 - y1) + (x2 - x1) * (x2 - x1));
 	}
 
 	public double getAdjDistance(double[] num) {
@@ -225,18 +262,18 @@ public class Graph {
 		}
 	}
 
-	public void printCords(int[][] cords) {
+	public void printCords(double[][] cords) {
 		System.out.println("Cords");
 		for (int i = 0; i < size; i++) {
-			System.out.println("x: " + cords[i][0] + "  y: " + cords[i][1]);
+			System.out.format("x: %7.1f  | y: %7.1f\n", cords[i][0], cords[i][1]);
 		}
 	}
 
-	public void printCordsOrdered(int[][] cords) {
+	public void printCordsOrdered(double[][] cords) {
 		System.out.println("Cords");
 		for (int i = 0; i < size; i++) {
 			int curr = vertices[i];
-			System.out.println("x: " + cords[curr][0] + "  y: " + cords[curr][1]);
+			System.out.format("x: %7.1f  | y: %7.1f\n", cords[curr][0], cords[curr][1]);
 		}
 	}
 
