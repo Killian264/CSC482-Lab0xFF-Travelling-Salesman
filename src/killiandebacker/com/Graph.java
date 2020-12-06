@@ -1,8 +1,6 @@
 package killiandebacker.com;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -19,7 +17,7 @@ public class Graph {
 		vertices = new int[size];
 
 
-		initalizeVertices();
+		initializeVertices();
 		clearGraph();
 	}
 
@@ -207,15 +205,13 @@ public class Graph {
 	// 	return cords;
 	// }
 
-	public void initalizeVertices(){
+	public void initializeVertices(){
 		for (int i = 1; i < size; i++) {
 			vertices[i] = i;
 		}
-		printVertices();
 	}
 
 	public void randomizeVertices(){
-		printVertices();
 		Random random = new Random();
 
 		// keeping the first vertex always the root should simplify some things
@@ -256,7 +252,7 @@ public class Graph {
 		System.out.println("Graph");
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
-				System.out.format("%5d", matrix[i][j]);
+				System.out.format("%7.1f", matrix[i][j]);
 			}
 			System.out.println();
 		}

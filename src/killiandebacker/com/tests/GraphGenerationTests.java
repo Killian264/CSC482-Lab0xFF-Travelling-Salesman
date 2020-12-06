@@ -9,7 +9,7 @@ public class GraphGenerationTests {
 
 
 	@Test
-    public void test(){
+    public void EuclideanTest(){
 		Graph g = new Graph(10);
 		int[][] cords = g.generateRandomEuclideanCostMatrix(10);
 	
@@ -23,7 +23,7 @@ public class GraphGenerationTests {
 	}
 	
 	@Test
-	public void test2(){
+	public void CircleGraphTest(){
 		Graph g = new Graph(10);
 		double[][] cords = g.generateCircleGraphCostMatrix(10);
 	
