@@ -1,6 +1,9 @@
 package killiandebacker.com.tests;
 
 import org.junit.Test;
+
+import static org.junit.Assert.fail;
+
 import org.junit.Assert;
 
 import killiandebacker.com.*;
@@ -34,10 +37,26 @@ public class GraphGenerationTests {
 	
 		double dist = g.distance(cord1[0], cord1[1], cord2[0], cord2[1]);
         Assert.assertEquals(dist,matrix[2][4], .001);
-    }
+	}
+	
+
+	@Test
+	public void GreedyTest(){
+		Greedy test = new Greedy();
+		double[][] matrix;
+
+		try{
+            matrix = MatrixFile.read("./bin/matrix_euclidean.txt");
+        }
+        catch(Exception e){
+			fail("Error loading testing file");
+			return;
+		}
+
+		
+		double cost = test.TSP(matrix);
+		
+		Assert.assertEquals(271.5, cost, .01);
+	}
 }
 
-
-
-// Graph g = new Graph(12);
-// g.generateRandomSquareGraphCostMatrix(4);

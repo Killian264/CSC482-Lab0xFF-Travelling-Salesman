@@ -21,6 +21,14 @@ public class Graph {
 		clearGraph();
 	}
 
+	public Graph(double[][] matrix) {
+		size = matrix.length;
+		this.matrix = matrix;
+		vertices = new int[size];
+
+		initializeVertices();
+	}
+
 	public void clearGraph() {
 		for (double[] row : matrix) {
 			Arrays.fill(row, nil);
