@@ -1,6 +1,7 @@
 package killiandebacker.com.tests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import org.junit.Test;
 import killiandebacker.com.BruteForce;
 import killiandebacker.com.Graph;
 import killiandebacker.com.Greedy;
+import killiandebacker.com.DynamicProgramming;
 import killiandebacker.com.MatrixFile;
 import killiandebacker.com.Permute;
 
@@ -85,6 +87,24 @@ public class GraphGenerationTests {
 	}
 
 	@Test
+	public void DynamicProgrammingTest(){
+		DynamicProgramming test = new DynamicProgramming();
+		double[][] matrix;
+
+		try{
+            matrix = MatrixFile.read("./bin/matrix_euclidean.txt");
+        }
+        catch(Exception e){
+			fail("Error loading testing file");
+			return;
+		}
+
+		double cost = test.TSP(matrix);
+		
+		Assert.assertEquals(261.5, cost, .09);
+	}
+
+	@Test
 	public void PermuteTest(){
 		int n = 5;
 		ArrayList<Integer> vertices = new ArrayList<>();
@@ -102,6 +122,17 @@ public class GraphGenerationTests {
 	@Test
 	public void FactorialTest(){
 		Assert.assertEquals(120, Permute.generateFactorial(5));
+	}
+
+	@Test
+	public void PermuteIntegersTest(){
+		ArrayList<Integer> perms = Permute.combinations(2, 3);
+
+        assertTrue(
+			perms.contains(3) &&
+			perms.contains(5) &&
+			perms.contains(6)
+		);
 	}
 }
 

@@ -16,22 +16,22 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // Graph g = new Graph(112);
+        // // Graph g = new Graph(112);
 
-        int radius = 3;
+        // int radius = 3;
 
-        // g.generateRandomCostMatrix(100);
+        // // g.generateRandomCostMatrix(100);
 
-        // g.generateRandomEuclideanCostMatrix(10);
+        // // g.generateRandomEuclideanCostMatrix(10);
 
-        // g.generateRandomEuclideanCostMatrix(5);
+        // // g.generateRandomEuclideanCostMatrix(5);
 
 
-        // g.generateRandomSquareGraphCostMatrix(4);
+        // // g.generateRandomSquareGraphCostMatrix(4);
 
         double[][] matrix;
-        // g.generateCircleGraphCostMatrix(4);
-        // matrix = g.matrix;
+        // // g.generateCircleGraphCostMatrix(4);
+        // // matrix = g.matrix;
 
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
 
@@ -45,29 +45,34 @@ public class Main {
 
         // Graph g = new Graph(matrix);
 
-        // BruteForce test = new BruteForce();
-        // double cost = test.TSP(g);
+        DynamicProgramming test = new DynamicProgramming();
+        double cost = test.TSP(matrix);
+        System.out.println("COST: " + cost);
 
+        // // BruteForce test = new BruteForce();
+        // // double cost = test.TSP(g);
+
+        // // System.out.println("COST: " + cost);
+
+        // // int n = g.size;
+
+        // // ArrayList<Integer> vertices = new ArrayList<>();
+
+        // // for(int i = 0; i < n; i++){
+        // //     vertices.add(i);
+        // // }
+        // BruteForce test = new BruteForce();
+        // Graph g = new Graph(matrix);
+        // double cost = test.TSP(g);
         // System.out.println("COST: " + cost);
 
-        // int n = g.size;
-
-        // ArrayList<Integer> vertices = new ArrayList<>();
-
-        // for(int i = 0; i < n; i++){
-        //     vertices.add(i);
-        // }
-        BruteForce test = new BruteForce();
-        Graph g = new Graph(matrix);
-        double cost = test.TSP(g);
-        System.out.println("COST: " + cost);
-
-        Greedy test2 = new Greedy();
-        cost = test2.TSP(matrix);
-        System.out.println("COST: " + cost);
+        // Greedy test2 = new Greedy();
+        // cost = test2.TSP(matrix);
+        // System.out.println("COST: " + cost);
         
-        g.print();
+        // g.print();
     }
+
 
     private static void padder(String str){
         int maxPadding = 20;

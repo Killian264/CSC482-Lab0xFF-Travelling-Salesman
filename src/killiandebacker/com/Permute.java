@@ -14,15 +14,60 @@ public class Permute {
 	}
 
 	// This is edited code
-    // original solution found here https://stackoverflow.com/questions/2920315/permutation-of-array
-    public static void permute(List<ArrayList<Integer>> perms, ArrayList<Integer> arr, int k){
-        for(int i = k; i < arr.size(); i++){
-            Collections.swap(arr, i, k);
-            permute(perms, arr, k+1);
-            Collections.swap(arr, k, i);
-        }
-        if (k == arr.size() - 1){
-            perms.add(new ArrayList(arr));
-        }
-    }
+	// original solution found here https://stackoverflow.com/questions/2920315/permutation-of-array
+	public static void permute(List<ArrayList<Integer>> perms, ArrayList<Integer> arr, int k){
+		for(int i = k; i < arr.size(); i++){
+			Collections.swap(arr, i, k);
+			permute(perms, arr, k+1);
+			Collections.swap(arr, k, i);
+		}
+		if (k == arr.size() - 1){
+			perms.add(new ArrayList(arr));
+		}
+	}
+
+
+
+	// The code below is taken from pseudocode shown on in this video: https://www.youtube.com/watch?v=cY4HiiFHO1o
+	// ALL comments are mine
+
+	/**
+	 * Generate all integers of size size with count bits set to 1.
+	 * @param count Number of bits to be 1
+	 * @param size bit size  of integer
+	 * @return Array of permutations of the bits
+	 */
+	public static ArrayList<Integer> combinations(int count, int size) {
+		ArrayList<Integer> subsets = new ArrayList<>();
+		generateCombinations(0, 0, count, size, subsets);
+		return subsets;
+	}
+
+	/**
+	 * Helper to generate the bit sets.
+	 * @param set the current bit set
+	 * @param loc current location in bit set
+	 * @param bitsLeft number of bits left to be set
+	 * @param size size of the bit set
+	 * @param size all subsets
+	 * @return void subsets is passed by reference
+	 */
+	public static void generateCombinations(int set, int loc, int bitsLeft, int size, ArrayList<Integer> subsets) {
+		// If no bits are left this is a valid bitset
+		if (bitsLeft == 0){
+			subsets.add(set);
+		} 
+		else {
+			for (int i = loc; i < size; i++) {
+				// Flip the current bit
+				set |= 1 << i;
+
+				// Generate all the possible bitsets given this starting position
+				generateCombinations(set, i + 1, bitsLeft - 1, size, subsets);
+
+				// Unflip the current bit (all bitsets that have this bit flipped are now generated)
+				set &= ~(1 << i);
+			}
+		}
+	}
 }
