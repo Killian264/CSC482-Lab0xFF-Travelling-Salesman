@@ -4,8 +4,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadMXBean;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -40,13 +43,30 @@ public class Main {
             return;
         }
 
+        // Graph g = new Graph(matrix);
+
+        // BruteForce test = new BruteForce();
+        // double cost = test.TSP(g);
+
+        // System.out.println("COST: " + cost);
+
+        // int n = g.size;
+
+        // ArrayList<Integer> vertices = new ArrayList<>();
+
+        // for(int i = 0; i < n; i++){
+        //     vertices.add(i);
+        // }
+        BruteForce test = new BruteForce();
         Graph g = new Graph(matrix);
-
-        Greedy test = new Greedy();
-        double cost = test.TSP(g.matrix);
-
+        double cost = test.TSP(g);
         System.out.println("COST: " + cost);
 
+        Greedy test2 = new Greedy();
+        cost = test2.TSP(matrix);
+        System.out.println("COST: " + cost);
+        
+        g.print();
     }
 
     private static void padder(String str){

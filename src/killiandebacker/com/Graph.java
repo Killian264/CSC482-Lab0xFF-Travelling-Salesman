@@ -7,7 +7,7 @@ import java.util.Random;
 public class Graph {
 
 	public double[][] matrix;
-	public static int[] vertices;
+	public int[] vertices;
 	int size;
 	final int nil = -1;
 

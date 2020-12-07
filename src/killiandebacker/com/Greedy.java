@@ -1,17 +1,19 @@
 package killiandebacker.com;
 
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Stack;
 
 public class Greedy {
-    public Stack<Integer> path = new Stack<>();
+    ArrayList<Integer> path = new ArrayList<Integer>();
     // Basically just grabs the shortest path every time 
     public double TSP(double[][] matrix){
         HashMap<Integer, Boolean> visited = new HashMap<>();
 
+        int n = matrix.length;
+
         visited.put(0, true);
-        path.push(0);
+        path.add(0);
         double cost = 0;
 
         int current = 0;
@@ -20,7 +22,7 @@ public class Greedy {
 
         for(int i = 0; i < size - 1; i++){
 
-            double[] row = matrix[current];
+            double[] row = Arrays.copyOf(matrix[current], n);
             for(int k = 0; k < size; k++){
                 if(visited.containsKey(k)){
                     row[k] = -1;
@@ -48,20 +50,20 @@ public class Greedy {
 
             visited.put(current, true);
             current = next;
-            path.push(current);
+            path.add(current);
             cost += min;
 
         }
 
-        path.push(0);
+        path.add(0);
 
         cost += matrix[current][0];
 
         // Print path
-        // Collections.reverse(path);
-        // for(int i = 0; i < n + 1; i++){
-        //     System.out.print(path.pop() + " ->");
-        // }
+        for(int vertex : path){
+            System.out.print(vertex + " ->");
+        }
+
 
         return cost;
     }

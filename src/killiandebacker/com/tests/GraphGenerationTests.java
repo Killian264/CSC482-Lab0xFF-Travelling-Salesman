@@ -1,12 +1,19 @@
 package killiandebacker.com.tests;
 
-import org.junit.Test;
-
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import org.junit.Assert;
+import java.util.ArrayList;
+import java.util.List;
 
-import killiandebacker.com.*;
+import org.junit.Assert;
+import org.junit.Test;
+
+import killiandebacker.com.BruteForce;
+import killiandebacker.com.Graph;
+import killiandebacker.com.Greedy;
+import killiandebacker.com.MatrixFile;
+import killiandebacker.com.Permute;
 
 public class GraphGenerationTests {
 
@@ -53,10 +60,48 @@ public class GraphGenerationTests {
 			return;
 		}
 
-		
 		double cost = test.TSP(matrix);
 		
 		Assert.assertEquals(271.5, cost, .01);
+	}
+
+	@Test
+	public void BruteForceTest(){
+		BruteForce test = new BruteForce();
+		double[][] matrix;
+
+		try{
+            matrix = MatrixFile.read("./bin/matrix_euclidean.txt");
+        }
+        catch(Exception e){
+			fail("Error loading testing file");
+			return;
+		}
+
+		Graph g = new Graph(matrix);
+		double cost = test.TSP(g);
+		
+		Assert.assertEquals(261.5, cost, .09);
+	}
+
+	@Test
+	public void PermuteTest(){
+		int n = 5;
+		ArrayList<Integer> vertices = new ArrayList<>();
+
+        for(int i = 0; i < n; i++){
+            vertices.add(i);
+        }
+
+        List<ArrayList<Integer>> perms = new ArrayList<ArrayList<Integer>>();
+		Permute.permute(perms, vertices, 0);
+		
+		assertEquals(Permute.generateFactorial(n), perms.size());
+	}
+
+	@Test
+	public void FactorialTest(){
+		Assert.assertEquals(120, Permute.generateFactorial(5));
 	}
 }
 
