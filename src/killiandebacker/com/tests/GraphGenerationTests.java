@@ -37,7 +37,8 @@ public class GraphGenerationTests {
 	@Test
 	public void CircleGraphTest(){
 		Graph g = new Graph(10);
-		double[][] cords = g.generateCircleGraphCostMatrix(10);
+		double[][] cords = new double[10][2];
+		g.generateCircleGraphCostMatrix(10, cords);
 	
 		double[] cord1 = cords[2];
 		double[] cord2 = cords[4];
@@ -51,171 +52,148 @@ public class GraphGenerationTests {
 
 	@Test
 	public void GreedyTest(){
-		Greedy test = new Greedy();
-		double[][] matrix;
-
-		try{
-            matrix = MatrixFile.read("./bin/matrix_euclidean.txt");
-        }
-        catch(Exception e){
-			fail("Error loading testing file");
-			return;
-		}
-
-		double cost = test.TSP(matrix);
-		
+		double cost = GreedyRun("./bin/matrix_euclidean.txt");
 		Assert.assertEquals(271.5, cost, .01);
 	}
 
 	@Test
 	public void GreedyTest2(){
-		Greedy test = new Greedy();
-		double[][] matrix;
-
-		try{
-            matrix = MatrixFile.read("./bin/matrix.txt");
-        }
-        catch(Exception e){
-			fail("Error loading testing file");
-			return;
-		}
-
-		double cost = test.TSP(matrix);
-		
+		double cost = GreedyRun("./bin/matrix.txt");
 		Assert.assertEquals(309, cost, .01);
 	}
 
 	@Test
 	public void GreedyTest3(){
+		double cost = GreedyRun("./bin/matrix_5.txt");
+		Assert.assertEquals(25, cost, .01);
+	}
+
+	public double GreedyRun(String file){
 		Greedy test = new Greedy();
 		double[][] matrix;
 
 		try{
-            matrix = MatrixFile.read("./bin/matrix_5.txt");
+            matrix = MatrixFile.read(file);
         }
         catch(Exception e){
 			fail("Error loading testing file");
-			return;
+			return -1;
 		}
 
-		double cost = test.TSP(matrix);
+		return test.TSP(matrix);
+	}
+	@Test
+	public void GreedyTest4(){
+		int size = 10;
+		Greedy test = new Greedy();
+		Graph g = new Graph(size);
+
+		double[][] cords = new double[size][2];
+		double minCost = g.generateCircleGraphCostMatrix(size, cords);
+		double cost = test.TSP(g.matrix);
 		
-		Assert.assertEquals(25, cost, .01);
+		Assert.assertEquals(minCost * size, cost, 1);
 	}
 
 	@Test
 	public void BruteForceTest(){
-		BruteForce test = new BruteForce();
-		double[][] matrix;
+		double cost = BruteForceRun("./bin/matrix_euclidean.txt");
 
-		try{
-            matrix = MatrixFile.read("./bin/matrix_euclidean.txt");
-        }
-        catch(Exception e){
-			fail("Error loading testing file");
-			return;
-		}
-
-		Graph g = new Graph(matrix);
-		test.init(matrix.length);
-		double cost = test.TSP(g);
-		
 		Assert.assertEquals(261.5, cost, .09);
 	}
 
 	@Test
 	public void BruteForceTest2(){
-		BruteForce test = new BruteForce();
-		double[][] matrix;
+		double cost = BruteForceRun("./bin/matrix.txt");
 
-		try{
-            matrix = MatrixFile.read("./bin/matrix.txt");
-        }
-        catch(Exception e){
-			fail("Error loading testing file");
-			return;
-		}
-
-		Graph g = new Graph(matrix);
-		test.init(matrix.length);
-		double cost = test.TSP(g);
-		
 		Assert.assertEquals(237, cost, 0);
 	}
 
 	@Test
 	public void BruteForceTest3(){
-		BruteForce test = new BruteForce();
-		double[][] matrix;
-
-		try{
-            matrix = MatrixFile.read("./bin/matrix_5.txt");
-        }
-        catch(Exception e){
-			fail("Error loading testing file");
-			return;
-		}
-
-		Graph g = new Graph(matrix);
-		test.init(matrix.length);
-		double cost = test.TSP(g);
+		double cost = BruteForceRun("./bin/matrix_5.txt");
 		
 		Assert.assertEquals(14, cost, 0);
 	}
 
-	@Test
-	public void DynamicProgrammingTest(){
-		DynamicProgramming test = new DynamicProgramming();
+	public double BruteForceRun(String file){
+		BruteForce test = new BruteForce();
 		double[][] matrix;
 
 		try{
-            matrix = MatrixFile.read("./bin/matrix_euclidean.txt");
+            matrix = MatrixFile.read(file);
         }
         catch(Exception e){
 			fail("Error loading testing file");
-			return;
+			return -1;
 		}
 
-		double cost = test.TSP(matrix);
+		Graph g = new Graph(matrix);
+		test.init(matrix.length);
+		return test.TSP(g);
+	}
+
+	@Test
+	public void BruteForceTest4(){
+		int size = 10;
+		BruteForce test = new BruteForce();
+		Graph g = new Graph(size);
+
+		double[][] cords = new double[size][2];
+		double minCost = g.generateCircleGraphCostMatrix(size, cords);
+		test.init(g.matrix.length);
+		double cost = test.TSP(g);
 		
+		Assert.assertEquals(minCost * size, cost, 1);
+	}
+
+	@Test
+	public void DynamicProgrammingTest(){
+		double cost = DynamicProgrammingRun("./bin/matrix_euclidean.txt");
 		Assert.assertEquals(261.5, cost, .09);
 	}
 
 	@Test
 	public void DynamicProgrammingTest2(){
-		DynamicProgramming test = new DynamicProgramming();
-		double[][] matrix;
-
-		try{
-            matrix = MatrixFile.read("./bin/matrix.txt");
-        }
-        catch(Exception e){
-			fail("Error loading testing file");
-			return;
-		}
-
-		double cost = test.TSP(matrix);
-		
+		double cost = DynamicProgrammingRun("./bin/matrix.txt");
 		Assert.assertEquals(237, cost, 0);
 	}
 
 	@Test
 	public void DynamicProgrammingTest3(){
+		double cost = DynamicProgrammingRun("./bin/matrix_5.txt");
+		Assert.assertEquals(14, cost, 0);
+	}
+
+	public double DynamicProgrammingRun(String file){
 		DynamicProgramming test = new DynamicProgramming();
 		double[][] matrix;
 
 		try{
-            matrix = MatrixFile.read("./bin/matrix_5.txt");
+            matrix = MatrixFile.read(file);
         }
         catch(Exception e){
 			fail("Error loading testing file");
-			return;
+			return -1;
 		}
 
-		double cost = test.TSP(matrix);
-		
-		Assert.assertEquals(14, cost, 0);
+		return test.TSP(matrix);
 	}
+
+	@Test
+	public void DynamicProgrammingTest4(){
+		int size = 10;
+		DynamicProgramming test = new DynamicProgramming();
+		Graph g = new Graph(size);
+
+		double[][] cords = new double[size][2];
+		double minCost = g.generateCircleGraphCostMatrix(size, cords);
+
+		double cost = test.TSP(g.matrix);
+		
+		Assert.assertEquals(minCost * size, cost, 0.1);
+	}
+
 
 	@Test
 	public void PermuteTest(){

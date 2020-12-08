@@ -106,19 +106,21 @@ public class Graph {
 
 	}
 
-	public double[][] generateCircleGraphCostMatrix(int radius){
+	public double generateCircleGraphCostMatrix(int radius, double[][] cords){
 		randomizeVertices();
 
 		// Using code from the one note
         double stepAngle = (2 * Math.PI) / size;
-		double[][] cords = new double[size][2];
 
 
         for (int step = 0; step < size; step++) {
             cords[step][0] = radius * Math.sin(step * stepAngle);
 			cords[step][1] = radius * Math.cos(step* stepAngle);
 		}
-        // printCords(cords);
+		// printCords(cords);
+		
+		// the minimum value will be the value * n that the equals the TSP cost
+		double min = Integer.MAX_VALUE;
 
 		// Generate matrix from cords
 		for (int i = 0; i < size; i++) {
@@ -136,10 +138,14 @@ public class Graph {
 
 				double d = distance(x1, y1, x2, y2);
 				addEdge(i, j, d);
+
+				if( min > d ){
+					min = d;
+				}
 			}
 		}
 
-		return cords;
+		return min;
 	}
 
 	// FOR TESTING ONLY 
