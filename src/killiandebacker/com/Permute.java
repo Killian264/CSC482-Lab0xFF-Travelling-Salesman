@@ -15,6 +15,11 @@ public class Permute {
 
 	// This is edited code
 	// original solution found here https://stackoverflow.com/questions/2920315/permutation-of-array
+
+
+	// BOTH OF THESE are from the article
+	// I originally thought that the first one was causing issues
+	// it was not I was not calculating expected properly
 	public static void permute(List<ArrayList<Integer>> perms, ArrayList<Integer> arr, int k){
 		for(int i = k; i < arr.size(); i++){
 			Collections.swap(arr, i, k);
@@ -25,6 +30,31 @@ public class Permute {
 			perms.add(new ArrayList(arr));
 		}
 	}
+
+	public static ArrayList<ArrayList<Integer>> permute2(int[] nums) {
+		ArrayList<ArrayList<Integer>> results = new ArrayList<ArrayList<Integer>>();
+		if (nums == null || nums.length == 0) {
+			return results;
+		}
+		ArrayList<Integer> result = new ArrayList<>();
+		dfs(nums, results, result);
+		return results;
+	}
+	
+	public static void dfs(int[] nums, ArrayList<ArrayList<Integer>> results, ArrayList<Integer> result) {
+		if (nums.length == result.size()) {
+			ArrayList<Integer> temp = new ArrayList<>(result);
+			results.add(temp);
+		}        
+		for (int i=0; i<nums.length; i++) {
+			if (!result.contains(nums[i])) {
+				result.add(nums[i]);
+				dfs(nums, results, result);
+				result.remove(result.size() - 1);
+			}
+		}
+	}
+
 
 
 

@@ -6,23 +6,21 @@ import java.util.List;
 public class BruteForce {
 
     public ArrayList<Integer> path = new ArrayList<Integer>();
+    List<ArrayList<Integer>> perms = new ArrayList<ArrayList<Integer>>();
+
+    public void init(int n){
+        int[] vertices = new int[n];
+
+        for(int i = 0; i < n; i++){
+            vertices[i] = i;
+		}
+
+		perms = Permute.permute2(vertices);
+    }
 
     public double TSP(Graph g){
 
         double[][] matrix = g.matrix;
-
-        int n = g.size;
-
-
-        ArrayList<Integer> vertices = new ArrayList<>();
-
-        for(int i = 1; i < n; i++){
-            vertices.add(i);
-        }
-
-        List<ArrayList<Integer>> perms = new ArrayList<ArrayList<Integer>>();
-        Permute.permute(perms, vertices, 0);
-
 
         double min = Integer.MAX_VALUE;
 
@@ -47,9 +45,9 @@ public class BruteForce {
         }
 
         // Print path
-        for(int vertex : path){
-            System.out.print(vertex + " ->");
-        }
+        // for(int vertex : path){
+        //     System.out.print(vertex + " ->");
+        // }
 
         return min;
     }

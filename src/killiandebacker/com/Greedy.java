@@ -60,9 +60,9 @@ public class Greedy {
         cost += matrix[current][0];
 
         // Print path
-        for(int vertex : path){
-            System.out.print(vertex + " ->");
-        }
+        // for(int vertex : path){
+        //     System.out.print(vertex + " ->");
+        // }
 
 
         return cost;

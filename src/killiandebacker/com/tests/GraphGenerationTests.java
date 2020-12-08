@@ -68,6 +68,42 @@ public class GraphGenerationTests {
 	}
 
 	@Test
+	public void GreedyTest2(){
+		Greedy test = new Greedy();
+		double[][] matrix;
+
+		try{
+            matrix = MatrixFile.read("./bin/matrix.txt");
+        }
+        catch(Exception e){
+			fail("Error loading testing file");
+			return;
+		}
+
+		double cost = test.TSP(matrix);
+		
+		Assert.assertEquals(309, cost, .01);
+	}
+
+	@Test
+	public void GreedyTest3(){
+		Greedy test = new Greedy();
+		double[][] matrix;
+
+		try{
+            matrix = MatrixFile.read("./bin/matrix_5.txt");
+        }
+        catch(Exception e){
+			fail("Error loading testing file");
+			return;
+		}
+
+		double cost = test.TSP(matrix);
+		
+		Assert.assertEquals(25, cost, .01);
+	}
+
+	@Test
 	public void BruteForceTest(){
 		BruteForce test = new BruteForce();
 		double[][] matrix;
@@ -81,9 +117,50 @@ public class GraphGenerationTests {
 		}
 
 		Graph g = new Graph(matrix);
+		test.init(matrix.length);
 		double cost = test.TSP(g);
 		
 		Assert.assertEquals(261.5, cost, .09);
+	}
+
+	@Test
+	public void BruteForceTest2(){
+		BruteForce test = new BruteForce();
+		double[][] matrix;
+
+		try{
+            matrix = MatrixFile.read("./bin/matrix.txt");
+        }
+        catch(Exception e){
+			fail("Error loading testing file");
+			return;
+		}
+
+		Graph g = new Graph(matrix);
+		test.init(matrix.length);
+		double cost = test.TSP(g);
+		
+		Assert.assertEquals(237, cost, 0);
+	}
+
+	@Test
+	public void BruteForceTest3(){
+		BruteForce test = new BruteForce();
+		double[][] matrix;
+
+		try{
+            matrix = MatrixFile.read("./bin/matrix_5.txt");
+        }
+        catch(Exception e){
+			fail("Error loading testing file");
+			return;
+		}
+
+		Graph g = new Graph(matrix);
+		test.init(matrix.length);
+		double cost = test.TSP(g);
+		
+		Assert.assertEquals(14, cost, 0);
 	}
 
 	@Test
@@ -105,6 +182,42 @@ public class GraphGenerationTests {
 	}
 
 	@Test
+	public void DynamicProgrammingTest2(){
+		DynamicProgramming test = new DynamicProgramming();
+		double[][] matrix;
+
+		try{
+            matrix = MatrixFile.read("./bin/matrix.txt");
+        }
+        catch(Exception e){
+			fail("Error loading testing file");
+			return;
+		}
+
+		double cost = test.TSP(matrix);
+		
+		Assert.assertEquals(237, cost, 0);
+	}
+
+	@Test
+	public void DynamicProgrammingTest3(){
+		DynamicProgramming test = new DynamicProgramming();
+		double[][] matrix;
+
+		try{
+            matrix = MatrixFile.read("./bin/matrix_5.txt");
+        }
+        catch(Exception e){
+			fail("Error loading testing file");
+			return;
+		}
+
+		double cost = test.TSP(matrix);
+		
+		Assert.assertEquals(14, cost, 0);
+	}
+
+	@Test
 	public void PermuteTest(){
 		int n = 5;
 		ArrayList<Integer> vertices = new ArrayList<>();
@@ -115,6 +228,21 @@ public class GraphGenerationTests {
 
         List<ArrayList<Integer>> perms = new ArrayList<ArrayList<Integer>>();
 		Permute.permute(perms, vertices, 0);
+		
+		assertEquals(Permute.generateFactorial(n), perms.size());
+	}
+
+	@Test
+	public void PermuteTest2(){
+		int n = 5;
+        int[] vertices = new int[n];
+
+        for(int i = 0; i < n; i++){
+            vertices[i] = i;
+		}
+
+        List<ArrayList<Integer>> perms = new ArrayList<ArrayList<Integer>>();
+		perms = Permute.permute2(vertices);
 		
 		assertEquals(Permute.generateFactorial(n), perms.size());
 	}
